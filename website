@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name | Actor Portfolio</title>
+    <link href="[fonts.googleapis.com](https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap)" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a1a1a;
+            --accent: #c9a227;
+            --light: #f5f5f5;
+            --text: #333;
+            --text-light: #666;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 5%;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('your-hero-image.jpg') center/cover;
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 3px;
+        }
+
+        .hero .tagline {
+            font-size: 1.2rem;
+            color: var(--accent);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            border: 2px solid var(--accent);
+            color: white;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+        }
+
+        .cta-btn:hover {
+            background: var(--accent);
+            color: var(--primary);
+        }
+
+        /* Section Styling */
+        section {
+            padding: 6rem 10%;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+            margin: 1rem auto 0;
+        }
+
+        /* Intro Video Section */
+        #intro {
+            background: var(--primary);
+            color: white;
+        }
+
+        .video-container {
+            max-width: 900px;
+            margin: 0 auto;
+            aspect-ratio: 16/9;
+            background: #000;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .video-container video,
+        .video-container iframe {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* About Section */
+        #about {
+            background: var(--light);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 4rem;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .about-text h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .about-text p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .stats {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Mood Shots & Polaroids Gallery */
+        #gallery {
+            background: white;
+        }
+
+        .gallery-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .tab-btn {
+            padding: 0.75rem 2rem;
+            border: none;
+            background: var(--light);
+            cursor: pointer;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+
+        .tab-btn.active,
+        .tab-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            aspect-ratio: 3/4;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .polaroid {
+            background: white;
+            padding: 1rem 1rem 3rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transform: rotate(-2deg);
+            transition: transform 0.3s;
+        }
+
+        .polaroid:nth-child(even) {
+            transform: rotate(2deg);
+        }
+
+        .polaroid:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+
+        /* Work / Filmography */
+        #work {
+            background: var(--primary);
+            color: white;
+        }
+
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .work-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .work-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .work-card img {
+            width: 100%;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+        }
+
+        .work-info {
+            padding: 1.5rem;
+        }
+
+        .work-info h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .work-info .role {
+            color: var(--accent);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .work-info .year {
+            color: #888;
+            font-size: 0.85rem;
+        }
+
+        /* Skills & Training */
+        #skills {
+            background: var(--light);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .skill-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .skill-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .skill-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-card p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Education */
+        #education {
+            background: white;
+        }
+
+        .timeline {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: var(--accent);
+        }
+
+        .timeline-item {
+            display: flex;
+            justify-content: flex-end;
+            padding-right: 50%;
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-item:nth-child(even) {
+            justify-content: flex-start;
+            padding-right: 0;
+            padding-left: 50%;
+        }
+
+        .timeline-content {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 8px;
+            max-width: 350px;
+            margin: 0 2rem;
+        }
+
+        .timeline-content h4 {
+            color: var(--accent);
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-content .institution {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* Contact */
+        #contact {
+            background: var(--primary);
+            color: white;
+            text-align: center;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+
+        .contact-item h4 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .contact-item a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--accent);
+        }
+
+        /* Footer */
+        footer {
+            background: #111;
+            color: #666;
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav ul {
+                gap: 1rem;
+                flex-wrap: wrap;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 4rem 5%;
+            }
+
+            .timeline::before {
+                left: 0;
+            }
+
+            .timeline-item,
+            .timeline-item:nth-child(even) {
+                padding-left: 2rem;
+                padding-right: 0;
+                justify-content: flex-start;
+            }
+
+            .contact-info {
+                gap: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#intro">Intro</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#work">Work</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>YOUR NAME</h1>
+            <p class="tagline">Actor • Performer • Storyteller</p>
+            <a href="#intro" class="cta-btn">Watch My Reel</a>
+        </div>
+    </section>
+
+    <!-- Intro Video -->
+    <section id="intro">
+        <h2 class="section-title" style="color: white;">Introduction</h2>
+        <div class="video-container">
+            <!-- Replace with your video embed or file -->
+            <video controls poster="video-thumbnail.jpg">
+                <source src="your-intro-video.mp4" type="video/mp4">
+            </video>
+            <!-- Or use YouTube/Vimeo embed:
+            <iframe src="[youtube.com](https://www.youtube.com/embed/YOUR_VIDEO_ID)" frameborder="0" allowfullscreen></iframe>
+            -->
+        </div>
+    </section>
+
+    <!-- About Me -->
+    <section id="about">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-grid">
+            <div class="about-image">
+                <img src="your-portrait.jpg" alt="Your Name">
+            </div>
+            <div class="about-text">
+                <h3>Hello, I'm [Your Name]</h3>
+                <p>
+                    Write a compelling paragraph about yourself here. Talk about your journey 
+                    into acting, what drives you, your approach to characters, and what makes 
+                    you unique as a performer.
+                </p>
+                <p>
+                    Add another paragraph about your personality, interests outside of acting, 
+                    or your artistic philosophy. Let casting directors and collaborators get 
+                    a sense of who you are.
+                </p>
+                <div class="stats">
+                    <div class="stat">
+                        <div class="stat-number">15+</div>
+                        <div class="stat-label">Projects</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">5</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">Awards</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery - Mood Shots & Polaroids -->
+    <section id="gallery">
+        <h2 class="section-title">Gallery</h2>
+        <div class="gallery-tabs">
+            <button class="tab-btn active">Mood Shots</button>
+            <button class="tab-btn">Polaroids</button>
+            <button class="tab-btn">Behind the Scenes</button>
+        </div>
+        <div class="gallery-grid">
+            <!-- Mood Shots -->
+            <div class="gallery-item">
+                <img src="mood-shot-1.jpg" alt="Mood shot">
+            </div>
+            <div class="gallery-item">
+                <img src="mood-shot-2.jpg" alt="Mood shot">
+            </div>
+            <div class="gallery-item">
+                <img src="mood-shot-3.jpg" alt="Mood shot">
+            </div>
+            <div class="gallery-item">
+                <img src="mood-shot-4.jpg" alt="Mood shot">
+            </div>
+            <div class="gallery-item">
+                <img src="mood-shot-5.jpg" alt="Mood shot">
+            </div>
+            <div class="gallery-item">
+                <img src="mood-shot-6.jpg" alt="Mood shot">
+            </div>
+        </div>
+    </section>
+
+    <!-- Work / Filmography -->
+    <section id="work">
+        <h2 class="section-title" style="color: white;">My Work</h2>
+        <div class="work-grid">
+            <div class="work-card">
+                <img src="project-1.jpg" alt="Project thumbnail">
+                <div class="work-info">
+                    <h4>Project Title</h4>
+                    <p class="role">Lead Role - Character Name</p>
+                    <p class="year">2024 • Feature Film</p>
+                </div>
+            </div>
+            <div class="work-card">
+                <img src="project-2.jpg" alt="Project thumbnail">
+                <div class="work-info">
+                    <h4>Project Title</h4>
+                    <p class="role">Supporting Role - Character Name</p>
+                    <p class="year">2023 • Web Series</p>
+                </div>
+            </div>
+            <div class="work-card">
+                <img src="project-3.jpg" alt="Project thumbnail">
+                <div class="work-info">
+                    <h4>Project Title</h4>
+                    <p class="role">Lead Role - Character Name</p>
+                    <p class="year">2023 • Short Film</p>
+                </div>
+            </div>
+            <!-- Add more work cards as needed -->
+        </div>
+    </section>
+
+    <!-- Skills & Training -->
+    <section id="skills">
+        <h2 class="section-title">Skills & Training</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <div class="skill-icon">🎭</div>
+                <h4>Method Acting</h4>
+                <p>Trained in Stanislavski and Meisner techniques</p>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">🎤</div>
+                <h4>Voice & Diction</h4>
+                <p>Dialect coaching, voice modulation, dubbing</p>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">💃</div>
+                <h4>Movement</h4>
+                <p>Contemporary dance, stage combat, choreography</p>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">🎬</div>
+                <h4>On-Camera</h4>
+                <p>Film acting, audition technique, self-taping</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education -->
+    <section id="education">
+        <h2 class="section-title">Education</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h4>2022 - 2024</h4>
+                    <p class="institution">Film & Television Institute</p>
+                    <p>Diploma in Acting for Film & Television</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h4>2020 - 2022</h4>
+                    <p class="institution">Drama Academy</p>
+                    <p>Certificate in Theatre Arts</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h4>2018 - 2020</h4>
+                    <p class="institution">University Name</p>
+                    <p>Bachelor's Degree in Performing Arts</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+        <h2 class="section-title" style="color: white;">Get In Touch</h2>
+        <p style="max-width: 600px; margin: 0 auto; color: #aaa;">
+            Available for auditions, collaborations, and new projects. 
+            Let's create something amazing together.
+        </p>
+        <div class="contact-info">
+            <div class="contact-item">
+                <h4>Email</h4>
+                <a href="mailto:your@email.com">your@email.com</a>
+            </div>
+            <div class="contact-item">
+                <h4>Phone</h4>
+                <a href="tel:+1234567890">+1 234 567 890</a>
+            </div>
+            <div class="contact-item">
+                <h4>Agent</h4>
+                <a href="mailto:agent@agency.com">Agent Name - Agency</a>
+            </div>
+        </div>
+        <div class="social-links">
+            <a href="#" title="Instagram">IG</a>
+            <a href="#" title="IMDb">IMDb</a>
+            <a href="#" title="YouTube">YT</a>
+            <a href="#" title="LinkedIn">LI</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Your Name. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
